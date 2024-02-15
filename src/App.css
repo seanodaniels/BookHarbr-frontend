@@ -2,6 +2,9 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+}
+
+#page h1 {
   text-align: center;
 }
 
@@ -35,6 +38,7 @@
 
 .card {
   padding: 2em;
+  text-align: center;
 }
 
 .read-the-docs {
