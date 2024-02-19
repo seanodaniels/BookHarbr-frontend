@@ -10,7 +10,9 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 
 import Books from './components/Books'
+import Lists from './components/Lists'
 import { initializeBooks } from './reducers/booksReducer'
+import { initializeLists } from './reducers/listsReducer'
 
 const App = () => {
   const dispatch = useDispatch() 
@@ -19,12 +21,14 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeBooks())
+    dispatch(initializeLists())
   }, [])
 
   return (
     <div id="page">
       <h1>BookHarbr</h1>
       <Books />
+      <Lists />
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
