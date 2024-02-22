@@ -8,27 +8,43 @@ import {
   useMatch,
 } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-
-import Books from './components/Books'
+import Home from './components/Home'
 import Lists from './components/Lists'
+import UserAccount from  './components/UserAccount'
+import NavPrimary from './components/NavPrimary'
+import LoginForm from './components/LoginForm'
 import { initializeBooks } from './reducers/booksReducer'
 import { initializeLists } from './reducers/listsReducer'
+import { initializeUsers } from './reducers/usersReducer'
 
 const App = () => {
-  const dispatch = useDispatch() 
+  const dispatch = useDispatch()
+  let currentUser = useSelector(state => state.user)
+  if (!currentUser) {
+    currentUser = 'not logged in'
+  }
 
   const [count, setCount] = useState(0)
 
   useEffect(() => {
     dispatch(initializeBooks())
     dispatch(initializeLists())
+    dispatch(initializeUsers())
   }, [])
 
   return (
     <div id="page">
+      <div id="nav-primary">
+        <NavPrimary />
+      </div>
       <h1>BookHarbr</h1>
-      <Books />
-      <Lists />
+      <p>User: {currentUser.username}</p>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/lists" element={<Lists />} />
+        <Route path="/my-account" element={<UserAccount />} />
+        <Route path="/login-form" element={<LoginForm />} />
+      </Routes>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}

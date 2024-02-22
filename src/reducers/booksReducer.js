@@ -19,7 +19,6 @@ export const {
 export const initializeBooks = () => {
   return async dispatch => {
     const allTheBooks = await booksService.getAll()
-    console.log('all', allTheBooks)
     dispatch(setBooks(allTheBooks))
   }
 }

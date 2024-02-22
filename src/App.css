@@ -1,11 +1,26 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 0 2rem 0;
 }
 
 #page h1 {
-  text-align: center;
+  font-size: 2rem;
+  margin: 0;
+  text-align: left;
+}
+
+#nav-primary {
+  margin: 0 0 1rem 0;
+}
+
+#nav-primary a {
+  font-size: 0.75rem;
+  margin: 0 1rem 0 0;
+}
+
+.card {
+  margin-top: 10rem;
 }
 
 .logo {
