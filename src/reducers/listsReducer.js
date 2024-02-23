@@ -23,4 +23,12 @@ export const initializeLists = () => {
   }
 }
 
+export const setUserLists = (currentUser) => {
+  return async dispatch => {
+    const allUserLists = await listsService
+      .getUserLists(currentUser.id)
+    dispatch(setLists(allUserLists))
+  }
+}
+
 export default listsSlice.reducer

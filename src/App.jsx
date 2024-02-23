@@ -8,6 +8,8 @@ import {
   useMatch,
 } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { userSet } from './reducers/userReducer'
+import listsService from './services/lists'
 import Home from './components/Home'
 import Lists from './components/Lists'
 import UserAccount from  './components/UserAccount'
@@ -19,17 +21,19 @@ import { initializeUsers } from './reducers/usersReducer'
 
 const App = () => {
   const dispatch = useDispatch()
-  let currentUser = useSelector(state => state.user)
-  if (!currentUser) {
-    currentUser = 'not logged in'
-  }
 
   const [count, setCount] = useState(0)
 
   useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBloglistUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      dispatch(userSet(user))
+      listsService.setToken(user.token)
+    }
+  
+ 
     dispatch(initializeBooks())
-    dispatch(initializeLists())
-    dispatch(initializeUsers())
   }, [])
 
   return (
@@ -38,7 +42,7 @@ const App = () => {
         <NavPrimary />
       </div>
       <h1>BookHarbr</h1>
-      <p>User: {currentUser.username}</p>
+      <p>User: </p>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/lists" element={<Lists />} />
