@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { userSet } from './reducers/userReducer'
+import { setUserLists } from './reducers/listsReducer'
 import listsService from './services/lists'
 import Home from './components/Home'
 import Lists from './components/Lists'
@@ -21,18 +22,18 @@ import { initializeUsers } from './reducers/usersReducer'
 
 const App = () => {
   const dispatch = useDispatch()
-
+  const currentUser = useSelector(state => state.user)
   const [count, setCount] = useState(0)
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBloglistUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
+    const loggedInBookHarbrUser = window.localStorage.getItem('loggedInBookHarbrUser')
+    if (loggedInBookHarbrUser) {
+      console.log('hit')
+      const user = JSON.parse(loggedInBookHarbrUser)
       dispatch(userSet(user))
       listsService.setToken(user.token)
-    }
-  
- 
+      dispatch(setUserLists(user))
+    } 
     dispatch(initializeBooks())
   }, [])
 
