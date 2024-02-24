@@ -17,8 +17,6 @@ import UserAccount from  './components/UserAccount'
 import NavPrimary from './components/NavPrimary'
 import LoginForm from './components/LoginForm'
 import { initializeBooks } from './reducers/booksReducer'
-import { initializeLists } from './reducers/listsReducer'
-import { initializeUsers } from './reducers/usersReducer'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -28,7 +26,6 @@ const App = () => {
   useEffect(() => {
     const loggedInBookHarbrUser = window.localStorage.getItem('loggedInBookHarbrUser')
     if (loggedInBookHarbrUser) {
-      console.log('hit')
       const user = JSON.parse(loggedInBookHarbrUser)
       dispatch(userSet(user))
       listsService.setToken(user.token)

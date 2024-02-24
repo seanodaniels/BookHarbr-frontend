@@ -13,7 +13,6 @@ const getAll = () => {
   return request.then((response) => response.data)
 }
 
-
 const getUserLists = () => {
   const config = {
     headers: { Authorization: token },

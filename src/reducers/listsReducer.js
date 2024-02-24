@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { useSelector } from 'react-redux'
 import listsService from '../services/lists'
+import { userSet } from '../reducers/userReducer'
 
 const listsSlice = createSlice({
   name: 'Lists',
@@ -23,11 +24,11 @@ export const initializeLists = () => {
   }
 }
 
-export const setUserLists = (currentUser) => {
+export const setUserLists = () => {
   return async dispatch => {
-    const allUserLists = await listsService
-      .getUserLists(currentUser.id)
-    dispatch(setLists(allUserLists))
+    const currentUserLists = await listsService.getUserLists()
+    dispatch(setLists(currentUserLists))
+
   }
 }
 
