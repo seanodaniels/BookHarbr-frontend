@@ -26,9 +26,12 @@ export const initializeLists = () => {
 
 export const setUserLists = () => {
   return async dispatch => {
-    const currentUserLists = await listsService.getUserLists()
-    dispatch(setLists(currentUserLists))
-
+    try {
+      const currentUserLists = await listsService.getUserLists()
+      dispatch(setLists(currentUserLists))
+    } catch (e) {
+      window.localStorage.removeItem('loggedInBookHarbrUser')
+    }
   }
 }
 

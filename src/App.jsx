@@ -31,7 +31,6 @@ const App = () => {
       listsService.setToken(user.token)
       dispatch(setUserLists(user))
     } 
-    dispatch(initializeBooks())
   }, [])
 
   return (
