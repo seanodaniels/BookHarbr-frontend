@@ -45,7 +45,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/lists" element={<Lists />} />
         <Route path="/my-account" element={<UserAccount />} />
-        <Route path="/login-form" element={<LoginForm />} />
+        <Route path="/login-form" element={<LoginForm location="page" />} />
       </Routes>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>

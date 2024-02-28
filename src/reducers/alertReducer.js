@@ -2,7 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const alertSlice = createSlice({
   name: 'alert',
-  initialState: [],
+  initialState: [{
+    message: null,
+    type: 'CLEAR'
+  }],
   reducers: {
     setNotification(state, action) {
       const content = action.payload

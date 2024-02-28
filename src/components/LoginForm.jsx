@@ -5,14 +5,14 @@ import { userSet } from '../reducers/userReducer'
 import { setUserLists } from '../reducers/listsReducer'
 import { createNotification, createError } from '../reducers/alertReducer'
 
-const LoginForm = () => {
+const LoginForm = (location) => {
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.user)
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (event) => {
     event.preventDefault()
-    const username = e.target.username.value
-    const password = e.target.password.value
+    const username = event.target.username.value
+    const password = event.target.password.value
 
     try {
       const user = await loginService.login({ username, password })
@@ -29,13 +29,24 @@ const LoginForm = () => {
 
   const handleLogout = (event) => {
     event.preventDefault()
-    window.localStorage.removeItem('loggedBloglistUser')
+    window.localStorage.removeItem('loggedInBookHarbrUser')
     dispatch(createNotification(`User logged out.`))
     dispatch(userSet(null))
   }
 
+  if (currentUser) {
+    return (
+      <div className="login-form">
+        <h2>{currentUser.username} logged in.</h2>
+        <form onSubmit={handleLogout}>
+          <button type="submit">Logout</button>
+        </form>        
+      </div>
+    )
+  }
+
   return (
-    <div id="login-form">
+    <div className="login-form">
       <h2>Login</h2>
         <form onSubmit={handleLogin}>
           <span>
