@@ -3,6 +3,7 @@ import loginService from '../services/login'
 import listsService from '../services/lists'
 import { userSet } from '../reducers/userReducer'
 import { setUserLists } from '../reducers/listsReducer'
+import { createNotification, createError } from '../reducers/alertReducer'
 
 const LoginForm = () => {
   const dispatch = useDispatch()
@@ -19,7 +20,9 @@ const LoginForm = () => {
       listsService.setToken(user.token)
       dispatch(userSet(user))
       dispatch(setUserLists(user))
+      dispatch(createNotification(`User ${username} logged in.`))
     } catch (exception) {
+      dispatch(createError('Wrong username or password. Please try again.'))
       console.log(`wrong username or password: ${exception}`)
     }
   }
@@ -27,6 +30,7 @@ const LoginForm = () => {
   const handleLogout = (event) => {
     event.preventDefault()
     window.localStorage.removeItem('loggedBloglistUser')
+    dispatch(createNotification(`User logged out.`))
     dispatch(userSet(null))
   }
 

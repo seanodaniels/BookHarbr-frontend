@@ -36,6 +36,23 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+#alert {
+  background-color: #444444;
+  padding: 1em;
+}
+
+.alert-ready {
+  display: none;
+}
+
+.alert-notification {
+  color: #dd0000;
+}
+
+.alert-notification {
+  color: #00dd00;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);

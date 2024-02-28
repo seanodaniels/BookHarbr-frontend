@@ -4,6 +4,7 @@ import booksReducer from './reducers/booksReducer'
 import listsReducer from './reducers/listsReducer'
 import usersReducer from './reducers/usersReducer'
 import userReducer from './reducers/userReducer'
+import alertReducer from './reducers/alertReducer'
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     lists: listsReducer,
     users: usersReducer,
     user: userReducer,
+    alert: alertReducer,
   },
 })
 

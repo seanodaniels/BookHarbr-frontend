@@ -16,6 +16,7 @@ import Lists from './components/Lists'
 import UserAccount from  './components/UserAccount'
 import NavPrimary from './components/NavPrimary'
 import LoginForm from './components/LoginForm'
+import Alert from './components/Alert'
 import { initializeBooks } from './reducers/booksReducer'
 
 const App = () => {
@@ -39,7 +40,7 @@ const App = () => {
         <NavPrimary />
       </div>
       <h1>BookHarbr</h1>
-      <p>User: </p>
+      <Alert />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/lists" element={<Lists />} />
