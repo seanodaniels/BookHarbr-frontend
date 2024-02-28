@@ -13,6 +13,7 @@ import { setUserLists } from './reducers/listsReducer'
 import listsService from './services/lists'
 import Home from './components/Home'
 import Lists from './components/Lists'
+import BookSearch from './components/BookSearch'
 import UserAccount from  './components/UserAccount'
 import NavPrimary from './components/NavPrimary'
 import LoginForm from './components/LoginForm'
@@ -44,17 +45,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/lists" element={<Lists />} />
+        <Route path="/book-search" element={<BookSearch />} />
         <Route path="/my-account" element={<UserAccount />} />
         <Route path="/login-form" element={<LoginForm location="page" />} />
       </Routes>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
     </div>
   )
 }

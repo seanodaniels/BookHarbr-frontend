@@ -3,9 +3,7 @@ import NeedLogin from './NeedLogin'
 
 const Lists = () => {
   const currentUser = useSelector(state => state.user)  
-  // need to call lists for current user only
-  // const lists = useSelector(state => state.lists)
-
+  const myLists = useSelector(state => state.lists)
 
   if (currentUser === null) {
     return ( <NeedLogin /> )
@@ -13,6 +11,13 @@ const Lists = () => {
   return (
     <div id="lists">
       <h2>Lists</h2>
+      <ul className="my-lists">
+      {myLists.map(l => {
+        return (
+          <li key={l.id}>{l.listName}</li>
+        )
+      })}
+      </ul>
     </div>
   )
 }

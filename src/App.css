@@ -4,6 +4,10 @@
   padding: 0 0 2rem 0;
 }
 
+#page {
+  min-width: 800px;
+}
+
 #page h1 {
   font-size: 2rem;
   margin: 0;
@@ -16,7 +20,15 @@
 
 #nav-primary a {
   font-size: 0.75rem;
-  margin: 0 1rem 0 0;
+  margin: 0 0 0 0.5rem;
+  padding: 0 0 0 0.5rem;
+  border-left: 1px dotted #999999;
+}
+
+#nav-primary :first-child {
+  margin-left: 0;
+  padding-left: 0;
+  border-left: 0;
 }
 
 .card {

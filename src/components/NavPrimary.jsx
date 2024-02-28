@@ -9,6 +9,7 @@ const NavPrimary = () => {
     <div id="nav-primary">
       <Link to="/">Home</Link>
       <Link to="/lists">My Lists</Link>
+      <Link to="/book-search">Book Search</Link>
       { user === null 
         ? <Link to="/login-form">Login</Link>
         : <Link to="/my-account">My Account</Link>
