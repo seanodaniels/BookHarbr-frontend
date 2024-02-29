@@ -1,32 +1,77 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import olService from '../services/ol'
 import { useDispatch, useSelector } from 'react-redux'
 import { createNotification, createError } from '../reducers/alertReducer'
+import { useNavigate, useSearchParams, Link } from 'react-router-dom'
 
 const BookSearch = () => {
   const [searchTerms, setSearchTerms ] = useState('')
   const [searchType, setSearchType] = useState('general')
-  const [searchResults, setSearchResults] = useState(null)
+  const [searchResults, setSearchResults] = useState(null)  
+  const [queryParameters] = useSearchParams()
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const params = []
+  queryParameters.forEach((value, key) => {
+    const formattedVal = value.split(' ').join('+')
+    params.push(`${key}=${formattedVal}`)
+  })
+  const queryParametersForUrl = params.join('&')
+
+  useEffect(() => {
+    olService
+    .olGeneralSearch(queryParametersForUrl)
+    .then(o => {
+      console.log('results', o)
+      if (o.numFound === 0) {
+        dispatch(createNotification('No results found.'))
+      } else {
+        setSearchResults(o.docs)
+      }
+    })    
+  }, [])
+
+  useEffect(() => {
+    olService
+    .olGeneralSearch(queryParametersForUrl)
+    .then(o => {
+      console.log('results', o)
+      if (o.numFound === 0) {
+        dispatch(createNotification('No results found.'))
+      } else {
+        setSearchResults(o.docs)
+      }
+    })    
+  }, [queryParameters])
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const searchObject = {
-      searchTerms,
-      searchType
+
+    let urlQueryType = 'q='
+
+    switch (searchType) {
+      case "general":
+        urlQueryType = "q="
+        break
+      case "title":
+        urlQueryType = "title="
+        break
+      case "author":
+        urlQueryType = "author="
+        break
+      default:
+        urlQueryType = "q="
+        break
     }
-      olService
-        .generalSearch(searchObject)
-        .then(o => {
-          console.log('results', o)
-          if (o.numFound === 0) {
-            dispatch(createNotification('No results found.'))
-          } else {
-            setSearchResults(o.docs)
-          }
-      })
+
+    const queryValues = searchTerms
+    const urlQueryValues = queryValues.split(' ').join('+')
+    const newSearchParams = urlQueryType + urlQueryValues
+    navigate(`/book-search/?${newSearchParams}`)
   }
+
 
   const handleOptionChange = (selectedOption) => {
     switch (selectedOption) {

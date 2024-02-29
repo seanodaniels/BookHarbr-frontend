@@ -10,6 +10,12 @@ const generalSearch = async (searchObject) => {
   return response.data
 }
 
+const olGeneralSearch = async (olParameterString) => {
+  const response = await axios.get(`${baseUrl}?${olParameterString}&${limit}`)
+  return response.data
+}
+
 export default {
-  generalSearch
+  generalSearch,
+  olGeneralSearch
 }
