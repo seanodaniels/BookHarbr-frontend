@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import olService from '../services/ol'
+import SearchResults from './SearchResults'
 import { useDispatch, useSelector } from 'react-redux'
 import { createNotification, createError } from '../reducers/alertReducer'
 import { useNavigate, useSearchParams, Link } from 'react-router-dom'
@@ -7,7 +8,8 @@ import { useNavigate, useSearchParams, Link } from 'react-router-dom'
 const BookSearch = () => {
   const [searchTerms, setSearchTerms ] = useState('')
   const [searchType, setSearchType] = useState('general')
-  const [searchResults, setSearchResults] = useState(null)  
+  const [searchResults, setSearchResults] = useState(null) 
+  const [numberOfRecords, setNumberOfRecords] = useState(null) 
   const [queryParameters] = useSearchParams()
 
   const dispatch = useDispatch()
@@ -15,35 +17,26 @@ const BookSearch = () => {
 
   const params = []
   queryParameters.forEach((value, key) => {
+    // [TO-DO]: check for valid parameters (&bork=broken is not a valid parameter) 
     const formattedVal = value.split(' ').join('+')
     params.push(`${key}=${formattedVal}`)
   })
   const queryParametersForUrl = params.join('&')
 
   useEffect(() => {
-    olService
-    .olGeneralSearch(queryParametersForUrl)
-    .then(o => {
-      console.log('results', o)
-      if (o.numFound === 0) {
-        dispatch(createNotification('No results found.'))
-      } else {
-        setSearchResults(o.docs)
-      }
-    })    
-  }, [])
-
-  useEffect(() => {
-    olService
-    .olGeneralSearch(queryParametersForUrl)
-    .then(o => {
-      console.log('results', o)
-      if (o.numFound === 0) {
-        dispatch(createNotification('No results found.'))
-      } else {
-        setSearchResults(o.docs)
-      }
-    })    
+    if (params.length > 0) { // do not run unless there are search parameters
+      olService
+      .olGeneralSearch(queryParametersForUrl)
+      .then(o => {
+        console.log('results', o)
+        if (o.numFound === 0) {
+          dispatch(createNotification('No results found.'))
+        } else {
+          setSearchResults(o.docs)
+          setNumberOfRecords(o.numFound)
+        }
+      })
+    }  
   }, [queryParameters])
 
   const handleSubmit = (event) => {
@@ -71,7 +64,6 @@ const BookSearch = () => {
     const newSearchParams = urlQueryType + urlQueryValues
     navigate(`/book-search/?${newSearchParams}`)
   }
-
 
   const handleOptionChange = (selectedOption) => {
     switch (selectedOption) {
@@ -135,11 +127,8 @@ const BookSearch = () => {
         <button type="submit">Search</button>
       </form>
 
-      { searchResults ? searchResults.map(r => {
-        return (
-          <p>{r.title} by {r.author_name}</p>
-        )
-      }) : null }
+      { searchResults ? <SearchResults results={searchResults} numRecords={numberOfRecords} /> : null }
+
     </div>
   )
 }
