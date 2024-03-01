@@ -60,7 +60,7 @@ const BookSearch = () => {
         if (o.numFound === 0) {
           dispatch(createNotification('No results found.'))
         } else {
-          setSearchResults(o.docs)
+          setSearchResults(o)
           setNumberOfRecords(o.numFound)
         }
       })
@@ -91,6 +91,7 @@ const BookSearch = () => {
     const newSearchParams = urlQueryType + urlQueryValues
     const pageInitialization = 'page=1'
     navigate(`/book-search/?${newSearchParams}&${pageInitialization}`)
+    
   }
 
   // Set React state on radio button change
@@ -182,6 +183,10 @@ const BookSearch = () => {
            handlePageDown={handlePageDown}
           /> 
         : null }
+
+        <hr />
+        <div>
+        </div>
 
     </div>
   )
