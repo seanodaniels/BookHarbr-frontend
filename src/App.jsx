@@ -14,6 +14,8 @@ import listsService from './services/lists'
 import Home from './components/Home'
 import Lists from './components/Lists'
 import BookSearch from './components/BookSearch'
+import BookDetail from './components/BookDetail'
+import WorksDetail from './components/WorksDetail'
 import UserAccount from  './components/UserAccount'
 import NavPrimary from './components/NavPrimary'
 import LoginForm from './components/LoginForm'
@@ -46,6 +48,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/lists" element={<Lists />} />
         <Route path="/book-search" element={<BookSearch />} />
+        <Route path="/book-detail/:type/:key" element={<BookDetail />} />
         <Route path="/my-account" element={<UserAccount />} />
         <Route path="/login-form" element={<LoginForm location="page" />} />
       </Routes>

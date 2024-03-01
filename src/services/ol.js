@@ -17,7 +17,20 @@ const olGeneralSearch = async (olParameterString) => {
   return response.data
 }
 
+const olWorksSearch = async (olParameterString) => {
+  const response = await axios.get(`${baseUrl}?${olParameterString}&limit=${siteConfig.searchLimit}&fields=key,title,author_name,editions`)
+  return response.data
+}
+
+const olBooksSearch = async (olParameterString) => {
+  const response = await axios.get(`${baseUrl}?${olParameterString}&limit=${siteConfig.searchLimit}&fields=key,title,author_name,editions`)
+  return response.data
+}
+
+
 export default {
   generalSearch,
-  olGeneralSearch
+  olGeneralSearch,
+  olBooksSearch,
+  olWorksSearch
 }
