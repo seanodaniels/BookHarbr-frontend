@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import olService from '../services/ol'
 import SearchResults from './SearchResults'
+import siteConfig from '../siteConfig'
 import { useDispatch, useSelector } from 'react-redux'
 import { createNotification, createError } from '../reducers/alertReducer'
 import { useNavigate, useSearchParams, Link } from 'react-router-dom'
@@ -112,9 +113,8 @@ const BookSearch = () => {
 
   const handlePageUp = (event) => {
     // Calculate total page numbers
-    const hardLimit = 10
     let totalPages = Math.floor(numberOfRecords/10)
-    numberOfRecords % hardLimit !== 0 ? totalPages += 1 : null
+    numberOfRecords % siteConfig.searchLimit !== 0 ? totalPages += 1 : null
 
     // go to next page only if we are not on the last page already
     const nextPage = currentPage === totalPages ? currentPage : currentPage + 1
