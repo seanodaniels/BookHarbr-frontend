@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import LoginForm from './LoginForm'
 
 const NavPrimary = () => {
   const user = useSelector(state => state.user)
@@ -11,7 +10,7 @@ const NavPrimary = () => {
       <Link to="/lists">My Lists</Link>
       <Link to="/book-search">Book Search</Link>
       { user === null 
-        ? <Link to="/login-form">Login</Link>
+        ? <Link to="/my-account">Login</Link>
         : <Link to="/my-account">My Account</Link>
       }      
     </div>

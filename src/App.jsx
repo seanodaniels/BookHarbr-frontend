@@ -18,7 +18,6 @@ import BookDetail from './components/BookDetail'
 import WorksDetail from './components/WorksDetail'
 import UserAccount from  './components/UserAccount'
 import NavPrimary from './components/NavPrimary'
-import LoginForm from './components/LoginForm'
 import Alert from './components/Alert'
 import { initializeBooks } from './reducers/booksReducer'
 
@@ -28,6 +27,7 @@ const App = () => {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
+    // Check validity of current user
     const loggedInBookHarbrUser = window.localStorage.getItem('loggedInBookHarbrUser')
     if (loggedInBookHarbrUser) {
       const user = JSON.parse(loggedInBookHarbrUser)
@@ -52,7 +52,6 @@ const App = () => {
         <Route path="/book-search" element={<BookSearch />} />
         <Route path="/book-detail/:type/:key" element={<BookDetail />} />
         <Route path="/my-account" element={<UserAccount />} />
-        <Route path="/login-form" element={<LoginForm location="page" />} />
       </Routes>
     </div>
   )
