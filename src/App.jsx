@@ -34,7 +34,9 @@ const App = () => {
       dispatch(userSet(user))
       listsService.setToken(user.token)
       dispatch(setUserLists(user))
-    } 
+    } else {
+      dispatch(userSet(null))
+    }
   }, [])
 
   return (
