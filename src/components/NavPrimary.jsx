@@ -11,7 +11,7 @@ const NavPrimary = () => {
       <Link to="/book-search">Book Search</Link>
       { user === null 
         ? <Link to="/my-account">Login</Link>
-        : <Link to="/my-account">My Account</Link>
+        : <Link to="/my-account">{user.username}'s Account</Link>
       }      
     </div>
   )
