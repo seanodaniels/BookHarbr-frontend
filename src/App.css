@@ -330,3 +330,21 @@ button.previous {
 .book-search label {
   margin-right: 0.5em;
 }
+
+.book-search input {
+  font-style: bold;
+  background-color: #ffffff;
+  color: #333333 !important;
+  border: 1px solid var(--bh-blue);
+  display: inline-block;
+  font-weight: 700;
+  line-height: 1.4;
+  text-decoration: none !important;
+  border-radius: 4px !important;
+  white-space: nowrap;
+  padding: 0.5rem 0.8rem;
+}
+
+.book-search button {
+  margin: 0 0.5em;
+}

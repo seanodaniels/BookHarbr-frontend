@@ -137,40 +137,43 @@ const BookSearch = () => {
           name="searchTerms" 
           onChange={(event) => setSearchTerms(event.target.value)}  
         />
-        <label>          
-          <input 
-            type="radio" 
-            name="search-type" 
-            value="general"
-            checked={searchType === 'general'} 
-            onChange={(event) => handleOptionChange('general')} 
-            className="search-check-input"
-          />
-          General
-        </label>
-        <label>          
-          <input 
-            type="radio" 
-            name="search-type" 
-            value="title"
-            className="search-check-input"
-            checked={searchType === 'title'}
-            onChange={(event) => handleOptionChange('title')} 
-          />
-          by Title
-        </label>
-        <label>          
-          <input 
-            type="radio" 
-            name="search-type" 
-            value="author"
-            className="search-check-input"
-            checked={searchType === 'author'}
-            onChange={(event) => handleOptionChange('author')} 
-          />
-          by Author
-        </label>
         <button type="submit">Search</button>
+        <div className="search-types">
+          <label>          
+            <input 
+              type="radio" 
+              name="search-type" 
+              value="general"
+              checked={searchType === 'general'} 
+              onChange={(event) => handleOptionChange('general')} 
+              className="search-check-input"
+            />
+            General
+          </label>
+          <label>          
+            <input 
+              type="radio" 
+              name="search-type" 
+              value="title"
+              className="search-check-input"
+              checked={searchType === 'title'}
+              onChange={(event) => handleOptionChange('title')} 
+            />
+            by Title
+          </label>
+          <label>          
+            <input 
+              type="radio" 
+              name="search-type" 
+              value="author"
+              className="search-check-input"
+              checked={searchType === 'author'}
+              onChange={(event) => handleOptionChange('author')} 
+            />
+            by Author
+          </label>
+        </div>
+        
       </form>
 
       { searchResults 

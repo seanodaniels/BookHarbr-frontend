@@ -5,16 +5,16 @@ const SearchResults = ({ results, numRecords, terms, currentPage, handlePageUp, 
   let totalPages = Math.floor(numRecords/10)
   numRecords % hardLimit !== 0 ? totalPages += 1 : null
 
-  const findItemUrl = (item) => {
+  // const findItemId = (item) => {
     
-    console.log('editions', item.editions)
-    console.log('numfound', item.numFound)
-    if (Number(item.editions.numFound) > 0) {
-      return item.editions.docs[0].key
-    } else{
-      return item.key ? item.key : null
-    }
-  }
+  //   console.log('editions', item.editions)
+  //   console.log('numfound', item.numFound)
+  //   if (Number(item.editions.numFound) > 0) {
+  //     return item.editions.docs[0].key
+  //   } else{
+  //     return item.key ? item.key : null
+  //   }
+  // }
 
   return (
     <div className="search-results">
@@ -23,12 +23,18 @@ const SearchResults = ({ results, numRecords, terms, currentPage, handlePageUp, 
       <p>page {currentPage} of {totalPages}</p>
       <ul id="search-results">
         { results ? results.docs.map(r => {
-            let itemUrl = findItemUrl(r)
+           // let itemIdentifier = findItemId(r)
             // if (r.editions.docs[0].key) {
             //    itemUrl = r.editions.docs[0].key
             // }
+
+            const authorList = r.author_name.map(a => a).toString().replace(",", ", ")
+            
             return (
-              <li key={r.key}><Link to={`/book-detail${itemUrl}`}>{r.title}</Link> by {r.author_name}.</li>
+              <li key={r.key}>
+                <Link to={`https://www.openlibrary.org${r.key}`}>{r.title}</Link> 
+                <span className="author"> by {authorList}</span>
+              </li>
             )
           }) : null }
             <button className="previous" onClick={handlePageDown}>previous</button>
