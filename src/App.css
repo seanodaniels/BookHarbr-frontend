@@ -327,11 +327,11 @@ button.previous {
   margin-right: 0.5em;
 }
 
-.book-search label {
+label {
   margin-right: 0.5em;
 }
 
-.book-search input {
+input {
   font-style: bold;
   background-color: #ffffff;
   color: #333333 !important;
@@ -345,6 +345,14 @@ button.previous {
   padding: 0.5rem 0.8rem;
 }
 
-.book-search button {
+button {
   margin: 0 0.5em;
+}
+
+form div {
+  margin: 0 0 1rem 0;
+}
+
+form.login input {
+  margin: 0 0 0 0.5rem;
 }

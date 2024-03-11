@@ -51,15 +51,15 @@ const UserAccount = (location) => {
   return (
     <div className="login-form">
       <h2>Login</h2>
-        <form onSubmit={handleLogin}>
-          <span>
-            username
+        <form className="login" onSubmit={handleLogin}>
+          <div>
+            Username
             <input type="text" name="username" className="login-username" />
-          </span>
-          <span>
-            password
+          </div>
+          <div>
+            Password
             <input type="password" name="password" className="login-password" />
-          </span>
+          </div>
           <button className="login-submit" type="submit">
             login
           </button>
