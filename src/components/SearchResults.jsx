@@ -17,22 +17,24 @@ const SearchResults = ({ results, numRecords, terms, currentPage, handlePageUp, 
   }
 
   return (
-    <ul id="search-results">
+    <div className="search-results">
       <h2>Your search for '{terms}'</h2>
       <p>{numRecords} records found.</p>
       <p>page {currentPage} of {totalPages}</p>
-      { results ? results.docs.map(r => {
-          let itemUrl = findItemUrl(r)
-          // if (r.editions.docs[0].key) {
-          //    itemUrl = r.editions.docs[0].key
-          // }
-          return (
-            <li key={r.key}><Link to={`/book-detail${itemUrl}`}>{r.title}</Link> by {r.author_name}.</li>
-          )
-        }) : null }
-          <button onClick={handlePageDown}>previous</button>
-          <button onClick={handlePageUp}>next</button>
-    </ul>
+      <ul id="search-results">
+        { results ? results.docs.map(r => {
+            let itemUrl = findItemUrl(r)
+            // if (r.editions.docs[0].key) {
+            //    itemUrl = r.editions.docs[0].key
+            // }
+            return (
+              <li key={r.key}><Link to={`/book-detail${itemUrl}`}>{r.title}</Link> by {r.author_name}.</li>
+            )
+          }) : null }
+            <button className="previous" onClick={handlePageDown}>previous</button>
+            <button className="next" onClick={handlePageUp}>next</button>
+      </ul>
+    </div>
   )
 }
 

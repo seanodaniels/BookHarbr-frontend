@@ -131,7 +131,7 @@ const BookSearch = () => {
   return (
     <div id="book-search">
       <p>Search for your book.</p>
-      <form onSubmit={handleSubmit}>
+      <form className="book-search" onSubmit={handleSubmit}>
         <input 
           type="text" 
           name="searchTerms" 

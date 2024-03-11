@@ -1,17 +1,247 @@
+@charset "UTF-8";
+@media screen and (prefers-reduced-motion:reduce) {
+  * {
+    transition: .01s !important
+  }
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box
+}
+
+a {
+  text-decoration: none
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block
+}
+
+audio,
+canvas,
+video {
+  display: inline-block
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0
+}
+
+[hidden] {
+  display: none
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  padding: 0
+}
+
+body,
+dd,
+dl,
+html,
+menu,
+ol,
+ul {
+  margin: 0
+}
+
+menu {
+  padding: 0
+}
+
+nav ol,
+nav ul {
+  list-style: none;
+  list-style-image: none
+}
+
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic
+}
+
+form {
+  margin: 0
+}
+
+legend {
+  border: 0;
+  padding: 0;
+  white-space: normal;
+  *margin-left: -7px
+}
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle
+}
+
+button,
+input {
+  line-height: normal
+}
+
+button,
+html input[type=button],
+input[type=reset],
+input[type=submit] {
+  -webkit-appearance: button;
+  cursor: pointer
+}
+
+button[disabled],
+input[disabled] {
+  cursor: default
+}
+
+input[type=checkbox],
+input[type=radio] {
+  padding: 0
+}
+
+input[type=search] {
+  -webkit-appearance: textfield
+}
+
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-decoration {
+  -webkit-appearance: none
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0
+}
+
+textarea {
+  overflow: auto;
+  vertical-align: top
+}
+
+:root {
+  --bh-blue: #5d89ba;
+  --bh-sea: #9fc0c1;
+  --bh-gin: #e1e9c9;
+  --bh-tan: #f5e9cf;
+  --bh-ivory: #f0ecee;
+  --bh-red: #993738;
+
+  --bh-blueD: #506984;
+  --bh-seaD: #5e7374;
+  --bh-ginD: #b0bc8e;
+  --bh-tanD: #cdb88a;
+  --bh-ivoryD: #baafb5;
+}
+
+
+
+html {
+  font-family: Merriweather, Alegreya, Garamond;
+  font-size: clamp(12px, .8rem + .25vw, 20px);
+  font-weight: 400;
+  line-height: 1.7
+}
+
+
+a {
+  color: var(--bh-seaD);
+}
+
+a:focus,
+a:hover {
+  color: var(--bh-blue);
+  text-decoration: underline;
+}
+
+/*
+ * =COLORS
+ */
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+ol,
+form {
+  color: #222222;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 0 2rem 0;
 }
 
+body {
+  background-color: var(--bh-ivory);
+}
+
+button {
+  font-style: bold;
+  background-color: var(--bh-sea);
+  color: #fff !important;
+  border: 0;
+  border-bottom: 1px solid #262626;
+  border-right: 1px solid #262626;
+  box-shadow: inset 1px 1px 0 #777, 0 2px 3px rgba(0, 0, 0, .4);
+  display: inline-block;
+  font-weight: 700;
+  line-height: 1.4;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  border-radius: 4px !important;
+  white-space: nowrap;
+  padding: 0.5rem 0.8rem;
+  text-align: center;
+  transition: .07s;
+  position: relative
+}
+
+input.submit.active,
+input.submit:not(.disabled):focus,
+input.submit:not(.disabled):hover,
+button:hover {
+  background-color: var(--bh-blue);
+}
+
+button:active {
+  background-color: var(--bh-sage);
+}
+
 #page {
   min-width: 800px;
+  margin: 0.75rem;
 }
 
 #page h1 {
   font-size: 2rem;
   margin: 0;
   text-align: left;
+  color: var(--bh-blue);
 }
 
 #nav-primary {
@@ -19,10 +249,10 @@
 }
 
 #nav-primary a {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   margin: 0 0 0 0.5rem;
   padding: 0 0 0 0.5rem;
-  border-left: 1px dotted #999999;
+  border-left: 1px dotted #444444;
 }
 
 #nav-primary :first-child {
@@ -41,34 +271,38 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 #alert {
-  background-color: #444444;
+  background-color: #999999;
   padding: 1em;
 }
 
 .alert-ready {
   display: none;
+  color: #ffffff;
 }
 
 .alert-notification {
-  color: #dd0000;
+  color: var(--bh-gin);
 }
 
-.alert-notification {
-  color: #00dd00;
+.alert-error {
+  color: var(--bh-red);
 }
 
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -87,4 +321,12 @@
 
 .read-the-docs {
   color: #888;
+}
+
+button.previous {
+  margin-right: 0.5em;
+}
+
+.book-search label {
+  margin-right: 0.5em;
 }
