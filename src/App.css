@@ -156,7 +156,7 @@ textarea {
 
 
 html {
-  font-family: Merriweather, Alegreya, Garamond;
+  font-family: Merriweather, Alegreya, serif;
   font-size: clamp(12px, .8rem + .25vw, 20px);
   font-weight: 400;
   line-height: 1.7

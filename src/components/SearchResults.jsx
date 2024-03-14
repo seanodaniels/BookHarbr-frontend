@@ -13,12 +13,19 @@ const SearchResults = ({ results, numRecords, terms, currentPage, handlePageUp, 
       <ul id="search-results">
         { results ? results.docs.map(r => {
 
-            const authorList = r.author_name.map(a => a).toString().replace(",", ", ")
+            const authorList = r.author_name 
+              ? r.author_name.map(a => a).toString().replace(",", ", ")
+              : null
             
             return (
               <li key={r.key}>
-                <Link to={`${r.key}`}>{r.title}</Link> 
-                <span className="author"> by {authorList} [KEY: {r.key}]</span>
+                <Link to={`${r.key}`}>{r.title}</Link>
+                {
+                  authorList 
+                    ? <span className="author"> by {authorList}</span>
+                    : null
+                }
+                &nbsp;[KEY: {r.key}]
               </li>
             )
           }) : null }
