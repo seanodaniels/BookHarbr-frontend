@@ -3,6 +3,7 @@ import siteConfig from '../siteConfig'
 
 const generalSearchUrl = 'https://openlibrary.org/search.json'
 const baseUrl = 'https://openlibrary.org'
+const worksSearchUrl = 'https://openlibrary.org/works'
 const authorSearchUrl = 'https://openlibrary.org'
 
 
@@ -20,17 +21,13 @@ const olGeneralSearch = async (olParameterString) => {
   return response.data
 }
 
-const olWorksSearch = async (type, itemKey) => {
-  try {
-    const response = await axios.get(`${baseUrl}/${type}/${itemKey}.json`)
-    return response.data
-  } catch (error) {
-    console.log('Error!', error.message)
-  }
+const olWorksSearch = async (itemKey) => {
+  const response = await axios.get(`${worksSearchUrl}/${itemKey}.json`)
+  return response.data
 }
 
 const olAuthorSearch = async (authorKey) => {
-  const response = await axios.get(`${authorSearchUrl}${authorKey}.json`)
+  const response = await axios.get(`${baseUrl}${authorKey}.json`)
   return response.data
 }
 
