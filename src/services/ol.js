@@ -22,8 +22,8 @@ const olGeneralSearch = async (olParameterString) => {
 }
 
 const olWorksSearch = async (itemKey) => {
-  const response = await axios.get(`${worksSearchUrl}/${itemKey}.json`)
-  return response.data
+  const worksResponse = await axios.get(`${worksSearchUrl}/${itemKey}.json`)
+  return worksResponse.data
 }
 
 const olAuthorSearch = async (authorKey) => {
