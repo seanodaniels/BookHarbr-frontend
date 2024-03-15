@@ -9,12 +9,16 @@ const listsSlice = createSlice({
   reducers: {
     setLists(state, action) {
       return action.payload
+    },
+    appendLists(state, action) {
+      state.push(action.payload)
     }
   }
 })
 
 export const {
-  setLists
+  setLists,
+  appendLists
 } = listsSlice.actions
 
 export const initializeLists = () => {
@@ -34,6 +38,18 @@ export const setUserLists = () => {
       dispatch(userSet(null))
     }
   }
+}
+
+export const createList = (listObject, currentUser) => {
+  return async dispatch => {
+    const newList = await listsService.newUserList(listObject)
+    const newListWithUser = {
+      ...newList,
+      user: currentUser
+    }
+    dispatch(appendLists(newListWithUser))
+  }
+
 }
 
 export default listsSlice.reducer
