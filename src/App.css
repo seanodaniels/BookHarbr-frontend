@@ -298,6 +298,19 @@ button:active {
   color: var(--bh-red);
 }
 
+#book-detail {
+  padding: 0;
+}
+
+#book-detail .description {
+  white-space: pre-wrap;
+}
+
+
+/*
+ * =====================
+ */
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
