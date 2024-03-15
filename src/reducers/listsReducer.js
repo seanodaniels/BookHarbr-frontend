@@ -31,6 +31,7 @@ export const setUserLists = () => {
       dispatch(setLists(currentUserLists))
     } catch (e) {
       window.localStorage.removeItem('loggedInBookHarbrUser')
+      dispatch(userSet(null))
     }
   }
 }
