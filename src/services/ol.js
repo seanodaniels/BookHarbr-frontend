@@ -16,7 +16,6 @@ const generalSearch = async (searchObject) => {
 }
 
 const olGeneralSearch = async (olParameterString) => {
-  console.log('test:', olParameterString)
   const response = await axios.get(`${generalSearchUrl}?${olParameterString}&limit=${siteConfig.searchLimit}&fields=key,title,author_name,cover_i,first_publish_year`)
   return response.data
 }

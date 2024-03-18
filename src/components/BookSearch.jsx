@@ -12,6 +12,8 @@ const BookSearch = () => {
   const [searchType, setSearchType] = useState('general')
   const [searchResults, setSearchResults] = useState(null) 
   const [numberOfRecords, setNumberOfRecords] = useState(null) 
+  const [selectedBooks, setSelectedBooks] = useState([])
+
   const [queryParameters] = useSearchParams()
 
   const dispatch = useDispatch()
@@ -56,7 +58,6 @@ const BookSearch = () => {
       olService
       .olGeneralSearch(queryParametersForUrl)
       .then(o => {
-        console.log('results', o)
         if (o.numFound === 0) {
           dispatch(createNotification('No results found.'))
         } else {
@@ -90,8 +91,28 @@ const BookSearch = () => {
     const urlQueryValues = queryValues.split(' ').join('+')
     const newSearchParams = urlQueryType + urlQueryValues
     const pageInitialization = 'page=1'
-    navigate(`/book-search/?${newSearchParams}&${pageInitialization}`)
+    navigate(`/book-search/?${newSearchParams}&${pageInitialization}`)    
+  }
+
+  const handleSelected = (itemKey, itemTitle, itemAuthors) => {
+
+    console.log(`Selected item: ${itemTitle} by ${itemAuthors}`)
+    const findKey = selectedBooks.filter(b => b.itemKey === itemKey)
+    console.log('findKey', findKey)
+    const newObject = {
+      itemKey: itemKey,
+      title: itemTitle,
+      authors: itemAuthors,
+    }
+
+    const newArray = [...selectedBooks, newObject ]
     
+    if (findKey && findKey.length > 0) {
+      const withoutKey = selectedBooks.filter(b => b.itemKey !== itemKey)
+      setSelectedBooks(withoutKey)
+    } else {
+      setSelectedBooks(newArray)
+    }
   }
 
   // Set React state on radio button change
@@ -130,6 +151,7 @@ const BookSearch = () => {
 
   return (
     <div id="book-search">
+      <p>Books selected: {selectedBooks.map(b => b.itemKey + ' ')}</p>
       <p>Search for your book.</p>
       <form className="book-search" onSubmit={handleSubmit}>
         <input 
@@ -184,6 +206,7 @@ const BookSearch = () => {
            terms={finalSearchTerms}
            handlePageUp={handlePageUp}
            handlePageDown={handlePageDown}
+           handleSelected={handleSelected}
           /> 
         : null }
 

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
 
-const SearchResults = ({ results, numRecords, terms, currentPage, handlePageUp, handlePageDown }) => {
+const SearchResults = ({ results, numRecords, terms, currentPage, handlePageUp, handlePageDown, handleSelected }) => {
   const hardLimit = 10
   let totalPages = Math.floor(numRecords/10)
   numRecords % hardLimit !== 0 ? totalPages += 1 : null
@@ -18,15 +19,19 @@ const SearchResults = ({ results, numRecords, terms, currentPage, handlePageUp, 
               : null
             
             return (
+              // <SearchItem key={r.key} bookKey={r.key} title={r.title} authors={authorList} />
               <li key={r.key}>
+                <input type="checkbox" onChange={() => { 
+                  handleSelected(r.key, r.title, authorList)                  
+                }} />
                 <Link to={`${r.key}`}>{r.title}</Link>
                 {
                   authorList 
                     ? <span className="author"> by {authorList}</span>
                     : null
-                }
-                &nbsp;[KEY: {r.key}]
+                }          
               </li>
+      
             )
           }) : null }
             <button className="previous" onClick={handlePageDown}>previous</button>
