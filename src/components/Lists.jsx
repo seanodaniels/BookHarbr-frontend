@@ -12,10 +12,11 @@ const Lists = () => {
     dispatch(createList(
       {
         listName: event.target.listName.value,
-        bookKeys: [],
+        books: [],
       },
       currentUser
     ))
+    event.target.listName.value = ''
   }
 
   if (currentUser === null) {

@@ -17,7 +17,7 @@ const getUserLists = () => {
   const config = {
     headers: { Authorization: token },
   }
-  const request = axios.get(baseUserListsUrl, config)
+  const request = axios.get(baseUrl, config)
   return request.then(response => response.data)
 }
 
@@ -29,9 +29,15 @@ const newUserList = async (newObject) => {
   return response.data
 }
 
+const update = async (id, newObject) => {
+  const request = axios.put(`${baseUrl}/${id}`, newObject)
+  return request.then(response => response.data)
+}
+
 export default {
   getAll,
   setToken,
   getUserLists,
   newUserList,
+  update,
 }

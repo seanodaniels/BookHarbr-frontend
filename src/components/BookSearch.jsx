@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react'
 import olService from '../services/ol'
 import SearchResults from './SearchResults'
 import siteConfig from '../siteConfig'
+import ListsFunctions from './ListsFunctions'
 import { useDispatch, useSelector } from 'react-redux'
 import { createNotification, createError } from '../reducers/alertReducer'
+import { updateLists } from '../reducers/listsReducer'
 import { useNavigate, useSearchParams, Link } from 'react-router-dom'
 
 const BookSearch = () => {
@@ -22,6 +24,9 @@ const BookSearch = () => {
   const params = []
   const paramsWitoutPage = []
   const currentPage = Number(queryParameters.get('page'))
+  
+  const currentUser = useSelector((state) => state.user)
+  const userLists = useSelector(state => state.lists)
 
   // Build two strings from useSearchParams()
   // * queryParametersForUrl:   full URL parameter string
@@ -68,6 +73,32 @@ const BookSearch = () => {
     }  
   }, [queryParameters])
 
+  const handleListAdd = (event) => {
+    event.preventDefault()
+    console.log('hit', selectedBooks)
+
+    if (selectedBooks && selectedBooks.length > 0) {
+      const chosenList = userLists.find(l => l.id === '65f9ac53f8572a807eaf23b6')
+      const chosenListBooks = chosenList.books
+      const newListBooks = chosenListBooks.concat(selectedBooks)
+      console.log('newlistbooks', newListBooks)
+
+      const newList = {
+        ...chosenList,
+        books: newListBooks
+      }
+
+      console.log('newList', newList)
+      dispatch(updateLists(newList, currentUser))
+      setSelectedBooks([])
+
+
+      
+    } else {
+      console.log('empty selected list')
+    }
+  }
+
   const handleSubmit = (event) => {
     // Redirect URL according to submitted search
     // from React state
@@ -94,21 +125,21 @@ const BookSearch = () => {
     navigate(`/book-search/?${newSearchParams}&${pageInitialization}`)    
   }
 
-  const handleSelected = (itemKey, itemTitle, itemAuthors) => {
+  const handleSelected = (bookKey, bookTitle, bookAuthors) => {
 
-    console.log(`Selected item: ${itemTitle} by ${itemAuthors}`)
-    const findKey = selectedBooks.filter(b => b.itemKey === itemKey)
+    console.log(`Selected item: ${bookTitle} by ${bookAuthors}`)
+    const findKey = selectedBooks.filter(b => b.bookKey === bookKey)
     console.log('findKey', findKey)
     const newObject = {
-      itemKey: itemKey,
-      title: itemTitle,
-      authors: itemAuthors,
+      bookKey: bookKey,
+      title: bookTitle,
+      authors: bookAuthors.split(',').map(a => a.trim()),
     }
 
     const newArray = [...selectedBooks, newObject ]
     
     if (findKey && findKey.length > 0) {
-      const withoutKey = selectedBooks.filter(b => b.itemKey !== itemKey)
+      const withoutKey = selectedBooks.filter(b => b.bookKey !== bookKey)
       setSelectedBooks(withoutKey)
     } else {
       setSelectedBooks(newArray)
@@ -151,69 +182,71 @@ const BookSearch = () => {
 
   return (
     <div id="book-search">
-      <p>Books selected: {selectedBooks.map(b => b.itemKey + ' ')}</p>
-      <p>Search for your book.</p>
-      <form className="book-search" onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          name="searchTerms" 
-          onChange={(event) => setSearchTerms(event.target.value)}  
-        />
-        <button type="submit">Search</button>
-        <div className="search-types">
-          <label>          
-            <input 
-              type="radio" 
-              name="search-type" 
-              value="general"
-              checked={searchType === 'general'} 
-              onChange={(event) => handleOptionChange('general')} 
-              className="search-check-input"
-            />
-            General
-          </label>
-          <label>          
-            <input 
-              type="radio" 
-              name="search-type" 
-              value="title"
-              className="search-check-input"
-              checked={searchType === 'title'}
-              onChange={(event) => handleOptionChange('title')} 
-            />
-            by Title
-          </label>
-          <label>          
-            <input 
-              type="radio" 
-              name="search-type" 
-              value="author"
-              className="search-check-input"
-              checked={searchType === 'author'}
-              onChange={(event) => handleOptionChange('author')} 
-            />
-            by Author
-          </label>
+      <div id="list-modification">
+        <ListsFunctions handleListAdd={handleListAdd} />
+      </div>
+
+      <div id="search-main">
+        <p>Books selected: {selectedBooks.map(b => b.bookKey + ' ')}</p>
+        <p>Search for your book.</p>
+        <form className="book-search" onSubmit={handleSubmit}>
+          <input 
+            type="text" 
+            name="searchTerms" 
+            onChange={(event) => setSearchTerms(event.target.value)}  
+          />
+          <button type="submit">Search</button>
+          <div className="search-types">
+            <label>          
+              <input 
+                type="radio" 
+                name="search-type" 
+                value="general"
+                checked={searchType === 'general'} 
+                onChange={(event) => handleOptionChange('general')} 
+                className="search-check-input"
+              />
+              General
+            </label>
+            <label>          
+              <input 
+                type="radio" 
+                name="search-type" 
+                value="title"
+                className="search-check-input"
+                checked={searchType === 'title'}
+                onChange={(event) => handleOptionChange('title')} 
+              />
+              by Title
+            </label>
+            <label>          
+              <input 
+                type="radio" 
+                name="search-type" 
+                value="author"
+                className="search-check-input"
+                checked={searchType === 'author'}
+                onChange={(event) => handleOptionChange('author')} 
+              />
+              by Author
+            </label>
+          </div>
+          
+        </form>
+
+        { searchResults 
+          ? <SearchResults 
+            results={searchResults} 
+            numRecords={numberOfRecords} 
+            currentPage={currentPage}
+            terms={finalSearchTerms}
+            handlePageUp={handlePageUp}
+            handlePageDown={handlePageDown}
+            handleSelected={handleSelected}
+            /> 
+          : null }
+
         </div>
-        
-      </form>
-
-      { searchResults 
-        ? <SearchResults 
-           results={searchResults} 
-           numRecords={numberOfRecords} 
-           currentPage={currentPage}
-           terms={finalSearchTerms}
-           handlePageUp={handlePageUp}
-           handlePageDown={handlePageDown}
-           handleSelected={handleSelected}
-          /> 
-        : null }
-
-        <hr />
-        <div>
-        </div>
-
     </div>
   )
 }
