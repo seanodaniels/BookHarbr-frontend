@@ -1,13 +1,19 @@
-import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const ListsFunctions = ({ handleListAdd }) => {
-  const dispatch = useDispatch()
-
+  const allLists = useSelector(s => s.lists)
   return (
     <div className="lists-functions">
       <form onSubmit={handleListAdd}>
-      <button type="submit">button</button>
+        { allLists.map(l => {
+            return (
+              <div key={l.id}>
+                <input type="radio" name="selectedList" value={l.id} />{l.listName}
+              </div>
+            )
+          })       
+         }
+        <button type="submit">add to list</button>
       </form>
     </div>
   )

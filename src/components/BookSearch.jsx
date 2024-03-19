@@ -75,25 +75,17 @@ const BookSearch = () => {
 
   const handleListAdd = (event) => {
     event.preventDefault()
-    console.log('hit', selectedBooks)
-
     if (selectedBooks && selectedBooks.length > 0) {
-      const chosenList = userLists.find(l => l.id === '65f9ac53f8572a807eaf23b6')
+      const selectedListId = event.target.selectedList.value
+      const chosenList = userLists.find(l => l.id === selectedListId)
       const chosenListBooks = chosenList.books
       const newListBooks = chosenListBooks.concat(selectedBooks)
-      console.log('newlistbooks', newListBooks)
-
       const newList = {
         ...chosenList,
         books: newListBooks
       }
-
-      console.log('newList', newList)
       dispatch(updateLists(newList, currentUser))
-      setSelectedBooks([])
-
-
-      
+      setSelectedBooks([])      
     } else {
       console.log('empty selected list')
     }
