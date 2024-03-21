@@ -21,9 +21,9 @@ const SearchResults = ({ results, numRecords, terms, currentPage, handlePageUp, 
             return (
               // <SearchItem key={r.key} bookKey={r.key} title={r.title} authors={authorList} />
               <li key={r.key}>
-                <button className="open-button" onClick={() => { 
+                <button className="open-button button-small" onClick={() => { 
                   handleSelected(r.key, r.title, authorList)                  
-                }}>Add</button>
+                }}>+list</button>
                 <Link to={`${r.key}`}>{r.title}</Link>
                 {
                   authorList 

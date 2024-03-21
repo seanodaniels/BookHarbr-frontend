@@ -74,26 +74,6 @@ const BookSearch = () => {
     }  
   }, [queryParameters])
 
-  const handleListAdd = (event) => {
-    event.preventDefault()
-    if (selectedBooks && selectedBooks.length > 0) {
-      const selectedListId = event.target.selectedList.value
-      const chosenList = userLists.find(l => l.id === selectedListId)
-      const chosenListBooks = chosenList.books
-      const newListBooks = chosenListBooks.concat(selectedBooks)
-      const newList = {
-        ...chosenList,
-        books: newListBooks
-      }
-      dispatch(updateLists(newList, currentUser))
-      setSelectedBooks([])
-      dispatch(createNotification(`${selectedBooks[0].title} added to ${chosenList.listName}.`)) 
-    } else {
-      console.log('empty selected list')
-    }
-    document.getElementById("myForm").style.display = "none"
-  }
-
   const handleSubmit = (event) => {
     // Redirect URL according to submitted search
     // from React state
@@ -134,7 +114,62 @@ const BookSearch = () => {
     } else {
       setSelectedBooks(newArray)
     }
-    document.getElementById("myForm").style.display = "block";
+    addToListShow()
+  }
+
+  const handleListAdd = (event) => {
+    event.preventDefault()
+    if (selectedBooks && selectedBooks.length > 0) {
+      // Add selected book to the list. Note: the functionality is in place to handle
+      // multiple selections but is not implemented yet. For now, we just grab the only
+      // (and first) item in the array.
+      const selectedListId = event.target.selectedList.value
+      const chosenList = userLists.find(l => l.id === selectedListId)
+      const chosenListContents = chosenList.books
+      const chosenListKeys = chosenListContents.map(item => item.bookKey)
+      
+      // build an array called dupesArr containing any item in selectedBooks that is also
+      // in chosenList
+      const dupesArr = selectedBooks.filter(value => chosenListKeys.includes(value.bookKey))
+
+      if (dupesArr && dupesArr.length > 0) {
+
+        // if dupesArr.length > 0, then 
+        // * create error message listing books that are dupes
+        const listOfDupes = dupesArr.map(d => d.title).join(', ')
+        dispatch(createError(`${listOfDupes} already in ${chosenList.listName}`))
+        // * call addToListHide()
+        addToListHide()
+        // * setSelectedBooks([])
+        setSelectedBooks([])
+      // else:
+      } else {
+        const newListBooks = chosenListContents.concat(selectedBooks)
+        const newList = {
+          ...chosenList,
+          books: newListBooks
+        }
+        dispatch(updateLists(newList, currentUser))
+        setSelectedBooks([])
+        dispatch(createNotification(`${selectedBooks[0].title} added to list "${chosenList.listName}"`)) 
+      }
+    } else {
+      console.log('error: empty selected list')
+    }
+    addToListHide()
+  }
+
+  const handleListCancel = (event) => {
+    addToListHide()
+    setSelectedBooks([])
+  }
+
+  const addToListShow = () => {
+    document.getElementById("myForm").style.display = "block"
+  }
+
+  const addToListHide = () => {
+    document.getElementById("myForm").style.display = "none"
   }
 
   // Set React state on radio button change
@@ -174,7 +209,7 @@ const BookSearch = () => {
   return (
     <div id="book-search">
       <div id="list-modification">
-          <ListsFunctions handleListAdd={handleListAdd} />
+          <ListsFunctions selectedBooks={selectedBooks} handleListAdd={handleListAdd} handleListCancel={handleListCancel} />
       </div>
 
       <div id="search-main">

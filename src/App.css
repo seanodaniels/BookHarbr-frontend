@@ -221,6 +221,13 @@ button {
   position: relative
 }
 
+.button-small {
+  font-size: 80%;
+  font-weight: 700;
+  line-height: 0.8;
+  padding: 0.4rem 0.5rem;
+}
+
 input.submit.active,
 input.submit:not(.disabled):focus,
 input.submit:not(.disabled):hover,
@@ -316,9 +323,6 @@ button:active {
   {
   box-sizing: border-box;
 }
-
-/* Button used to open the contact form - fixed at the bottom of the page */
-.open-button {}
 
 /* The popup form - hidden by default */
 .form-popup {

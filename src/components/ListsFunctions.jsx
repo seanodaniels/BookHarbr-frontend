@@ -1,10 +1,14 @@
 import { useSelector } from 'react-redux'
 
-const ListsFunctions = ({ handleListAdd }) => {
+const ListsFunctions = ({ selectedBooks, handleListAdd, handleListCancel }) => {
   const allLists = useSelector(s => s.lists)
   return (
     <div className="lists-functions form-popup" id="myForm">
       <div className="popup-content">
+        { selectedBooks && selectedBooks[0] && selectedBooks[0].title 
+          ? <h2>Choose a list for {selectedBooks[0].title}:</h2>
+          : null
+        }
         <form onSubmit={handleListAdd}>
           { allLists.map(l => {
               return (
@@ -16,7 +20,7 @@ const ListsFunctions = ({ handleListAdd }) => {
           }
           <button type="submit">add to list</button>
         </form>
-        <button onClick={() => document.getElementById("myForm").style.display = "none"}>cancel</button>
+        <button onClick={handleListCancel}>cancel</button>
       </div>
     </div>
   )
