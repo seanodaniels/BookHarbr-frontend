@@ -127,13 +127,12 @@ const BookSearch = () => {
       const chosenList = userLists.find(l => l.id === selectedListId)
       const chosenListContents = chosenList.books
       const chosenListKeys = chosenListContents.map(item => item.bookKey)
-      
+
       // build an array called dupesArr containing any item in selectedBooks that is also
       // in chosenList
       const dupesArr = selectedBooks.filter(value => chosenListKeys.includes(value.bookKey))
 
       if (dupesArr && dupesArr.length > 0) {
-
         // if dupesArr.length > 0, then 
         // * create error message listing books that are dupes
         const listOfDupes = dupesArr.map(d => d.title).join(', ')
