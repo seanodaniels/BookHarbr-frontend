@@ -21,9 +21,9 @@ const SearchResults = ({ results, numRecords, terms, currentPage, handlePageUp, 
             return (
               // <SearchItem key={r.key} bookKey={r.key} title={r.title} authors={authorList} />
               <li key={r.key}>
-                <input type="checkbox" onChange={() => { 
+                <button className="open-button" onClick={() => { 
                   handleSelected(r.key, r.title, authorList)                  
-                }} />
+                }}>Add</button>
                 <Link to={`${r.key}`}>{r.title}</Link>
                 {
                   authorList 

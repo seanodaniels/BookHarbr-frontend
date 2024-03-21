@@ -15,6 +15,7 @@ const BookSearch = () => {
   const [searchResults, setSearchResults] = useState(null) 
   const [numberOfRecords, setNumberOfRecords] = useState(null) 
   const [selectedBooks, setSelectedBooks] = useState([])
+  const [showListsModal, setShowListsModal] = useState(false)
 
   const [queryParameters] = useSearchParams()
 
@@ -85,10 +86,12 @@ const BookSearch = () => {
         books: newListBooks
       }
       dispatch(updateLists(newList, currentUser))
-      setSelectedBooks([])      
+      setSelectedBooks([])
+      dispatch(createNotification(`${selectedBooks[0].title} added to ${chosenList.listName}.`)) 
     } else {
       console.log('empty selected list')
     }
+    document.getElementById("myForm").style.display = "none"
   }
 
   const handleSubmit = (event) => {
@@ -118,24 +121,20 @@ const BookSearch = () => {
   }
 
   const handleSelected = (bookKey, bookTitle, bookAuthors) => {
-
-    console.log(`Selected item: ${bookTitle} by ${bookAuthors}`)
     const findKey = selectedBooks.filter(b => b.bookKey === bookKey)
-    console.log('findKey', findKey)
     const newObject = {
       bookKey: bookKey,
       title: bookTitle,
       authors: bookAuthors.split(',').map(a => a.trim()),
     }
-
-    const newArray = [...selectedBooks, newObject ]
-    
+    const newArray = [...selectedBooks, newObject ]    
     if (findKey && findKey.length > 0) {
       const withoutKey = selectedBooks.filter(b => b.bookKey !== bookKey)
       setSelectedBooks(withoutKey)
     } else {
       setSelectedBooks(newArray)
     }
+    document.getElementById("myForm").style.display = "block";
   }
 
   // Set React state on radio button change
@@ -175,7 +174,7 @@ const BookSearch = () => {
   return (
     <div id="book-search">
       <div id="list-modification">
-        <ListsFunctions handleListAdd={handleListAdd} />
+          <ListsFunctions handleListAdd={handleListAdd} />
       </div>
 
       <div id="search-main">

@@ -306,6 +306,51 @@ button:active {
   white-space: pre-wrap;
 }
 
+/* Popup */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+  {
+  box-sizing: border-box;
+}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+.popup-content {
+  background-color: #fefefe;
+  margin: 1rem auto;
+  /* 15% from the top and centered */
+  padding: 1rem;
+  border: 1rem solid #888;
+  width: 80%;
+  /* Could be more or less, depending on screen size */
+}
 
 /*
  * =====================
