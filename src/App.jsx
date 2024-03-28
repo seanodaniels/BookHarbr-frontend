@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -15,19 +15,16 @@ import Home from './components/Home'
 import Lists from './components/Lists'
 import BookSearch from './components/BookSearch'
 import BookDetail from './components/BookDetail'
-import WorksDetail from './components/WorksDetail'
 import UserAccount from  './components/UserAccount'
 import NavPrimary from './components/NavPrimary'
 import Alert from './components/Alert'
-import { initializeBooks } from './reducers/booksReducer'
 
 const App = () => {
   const dispatch = useDispatch()
-  const currentUser = useSelector(state => state.user)
-  const [count, setCount] = useState(0)
 
   useEffect(() => {
     // Check validity of current user
+    // [TO-DO]: Rewrite user check. See Notion notes.
     const loggedInBookHarbrUser = window.localStorage.getItem('loggedInBookHarbrUser')
     if (loggedInBookHarbrUser) {
       const user = JSON.parse(loggedInBookHarbrUser)

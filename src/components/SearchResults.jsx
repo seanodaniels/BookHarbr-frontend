@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { useState, useEffect, useRef } from 'react'
 
 const SearchResults = ({ results, numRecords, terms, currentPage, handlePageUp, handlePageDown, handleSelected }) => {
   const hardLimit = 10
@@ -30,8 +29,7 @@ const SearchResults = ({ results, numRecords, terms, currentPage, handlePageUp, 
                     ? <span className="author"> by {authorList}</span>
                     : null
                 }          
-              </li>
-      
+              </li>      
             )
           }) : null }
             <button className="previous" onClick={handlePageDown}>previous</button>

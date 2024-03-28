@@ -1,6 +1,5 @@
 import axios from 'axios'
 const baseUrl = '/api/lists'
-const baseUserListsUrl = '/api/users/lists'
 
 let token = null
 
