@@ -356,6 +356,12 @@ button:active {
   /* Could be more or less, depending on screen size */
 }
 
+.rename-highlighted {
+  border: 1px solid green;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
 /*
  * =====================
  */

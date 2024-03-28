@@ -11,6 +11,8 @@ const Lists = () => {
 
   const DisplayList = ({ list }) => {
     const [listName, setListName] = useState(list.listName)
+    const [changeListNameVisible, setChangeListNameVisible] = useState(false)
+    const [showRename, setShowRename] = useState(false)
 
     const handleBookDelete = (book, event) => {
       const bookToBeDeleted = book
@@ -48,14 +50,26 @@ const Lists = () => {
       }
     }
 
+    const renameHidden = { display: showRename ? 'none' : '' }
+    const renameShown = { display: showRename ? '' : 'none' }
+    const renameHighlighted = showRename ? 'rename-highlighted' : ''
+
+    console.log('renameHighlighted', renameHighlighted)
+
     return (
       <div className="listItem">
-        <h3>{list.listName}</h3>
-        <div className="list-name-change">
-          <form onSubmit={(e) => handleListNameChange(list, e)}>
-            <input name="listNameInput"  />
-            <button type="submit">change</button>
-          </form>
+        <div className={renameHighlighted}>
+          <strong>{list.listName}</strong>
+          <button style={renameHidden} className="button-small" onClick={() => setShowRename(true)}>rename</button>
+        
+        
+          <div className="list-name-change" style={renameShown}>
+            <form onSubmit={(e) => handleListNameChange(list, e)}>
+              <input name="listNameInput"  />
+              <button type="submit">change name</button>
+            </form>
+            <button className="button-small" onClick={() => setShowRename(false)}>cancel</button>
+          </div>
         </div>
         { list.books && list.books.length > 0
           ? <ul className="book-list">
