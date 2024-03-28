@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import NeedLogin from './NeedLogin'
 import { createList, updateLists } from '../reducers/listsReducer'
@@ -9,6 +10,7 @@ const Lists = () => {
   const dispatch = useDispatch()
 
   const DisplayList = ({ list }) => {
+    const [listName, setListName] = useState(list.listName)
 
     const handleBookDelete = (book, event) => {
       const bookToBeDeleted = book
@@ -26,11 +28,35 @@ const Lists = () => {
           dispatch(createError(`Error: ${e}`))
         }
       }
-    }  
-  
+    }
+
+    const handleListNameChange = (list, e) => {
+      e.preventDefault()
+      const newListName = e.target.listNameInput.value
+      const changedList = { ...list, listName: newListName }
+
+      let confirmChange = `Confirm: change the name of list "${list.listName}" to "${newListName}"?`
+
+      if (window.confirm(confirmChange)) {
+        try {
+          dispatch(updateLists(changedList, currentUser))
+          dispatch(createNotification(`List "${list.listName}" renamed to "${newListName}"`))
+        } catch (e) {
+          dispatch(createError(`Error: ${e}`))
+        }
+        e.target.listNameInput.value = ''
+      }
+    }
+
     return (
       <div className="listItem">
         <h3>{list.listName}</h3>
+        <div className="list-name-change">
+          <form onSubmit={(e) => handleListNameChange(list, e)}>
+            <input name="listNameInput"  />
+            <button type="submit">change</button>
+          </form>
+        </div>
         { list.books && list.books.length > 0
           ? <ul className="book-list">
               {list.books.map(b => {
@@ -43,7 +69,8 @@ const Lists = () => {
           : null
         }
       </div>
-    )    
+    )  
+  
   } 
 
   const handleSubmit = (event) => {
