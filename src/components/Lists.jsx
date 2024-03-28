@@ -7,6 +7,27 @@ const Lists = () => {
   const myLists = useSelector(state => state.lists)
   const dispatch = useDispatch()
 
+
+  const DisplayList = ({ list }) => {
+    // console.log('test', list.books)
+    return (
+      <div className="listItem">
+        <h3>{list.listName}</h3>
+        { list.books && list.books.length > 0
+          ? <ul className="book-list">
+              {list.books.map(b => {
+                const authors = b.authors.join(', ')
+                return( 
+                  <li key={b.bookKey}>{b.title} by {authors}</li>
+              )}
+            )}
+            </ul>
+          : null
+        }
+      </div>
+    )    
+  } 
+
   const handleSubmit = (event) => {
     event.preventDefault()
     dispatch(createList(
@@ -29,13 +50,12 @@ const Lists = () => {
         <input name="listName" />
         <button type="submit">add list</button>
       </form>
-      <ul className="my-lists">
       {myLists.map(l => {
         return (
-          <li key={l.id}>{l.listName}</li>
+          <DisplayList key={l.id} list={l} />
+          // <li key={l.id}>{l.listName}</li>
         )
       })}
-      </ul>
     </div>
   )
 }
