@@ -1,15 +1,33 @@
 import { useSelector, useDispatch } from 'react-redux'
 import NeedLogin from './NeedLogin'
-import { createList } from '../reducers/listsReducer'
+import { createList, updateLists } from '../reducers/listsReducer'
+import { createNotification, createError } from '../reducers/alertReducer'
 
 const Lists = () => {
   const currentUser = useSelector(state => state.user)  
   const myLists = useSelector(state => state.lists)
   const dispatch = useDispatch()
 
-
   const DisplayList = ({ list }) => {
-    // console.log('test', list.books)
+
+    const handleBookDelete = (book, event) => {
+      const bookToBeDeleted = book
+      const bookToBeDeletedKey = bookToBeDeleted.bookKey
+      const changedListBooks = list.books.filter(b => b.bookKey !== bookToBeDeletedKey)
+      const changedList = { ...list, books: changedListBooks }
+
+      let confirmDelete = `Remove book "${book.title}" from ${list.listName}?`
+
+      if (window.confirm(confirmDelete)) {
+        try {
+          dispatch(updateLists(changedList, currentUser))
+          dispatch(createNotification(`${bookToBeDeleted.title} deleted`))
+        } catch (e) {
+          dispatch(createError(`Error: ${e}`))
+        }
+      }
+    }  
+  
     return (
       <div className="listItem">
         <h3>{list.listName}</h3>
@@ -18,7 +36,7 @@ const Lists = () => {
               {list.books.map(b => {
                 const authors = b.authors.join(', ')
                 return( 
-                  <li key={b.bookKey}>{b.title} by {authors}</li>
+                  <li key={b.bookKey}>{b.title} by {authors} <button className="button-small" onClick={(e) => handleBookDelete(b,e)}>x</button></li>
               )}
             )}
             </ul>
@@ -53,7 +71,6 @@ const Lists = () => {
       {myLists.map(l => {
         return (
           <DisplayList key={l.id} list={l} />
-          // <li key={l.id}>{l.listName}</li>
         )
       })}
     </div>

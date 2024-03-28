@@ -144,11 +144,11 @@ const BookSearch = () => {
       // else:
       } else {
         const newListBooks = chosenListContents.concat(selectedBooks)
-        const newList = {
+        const updatedUserLists = {
           ...chosenList,
           books: newListBooks
         }
-        dispatch(updateLists(newList, currentUser))
+        dispatch(updateLists(updatedUserLists, currentUser))
         setSelectedBooks([])
         dispatch(createNotification(`${selectedBooks[0].title} added to list "${chosenList.listName}"`)) 
       }
