@@ -69,8 +69,6 @@ const Lists = () => {
     const editShown = { display: showRename ? '' : 'none' }
     const editHighlighted = showRename ? 'edit-highlighted' : ''
 
-    console.log('editHighlighted', editHighlighted)
-
     return (
       <div className="listItem">
         <div className={editHighlighted}>
