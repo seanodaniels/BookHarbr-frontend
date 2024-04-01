@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import NeedLogin from './NeedLogin'
-import { createList, updateLists } from '../reducers/listsReducer'
+import { createList, updateLists, deleteList } from '../reducers/listsReducer'
 import { createNotification, createError } from '../reducers/alertReducer'
 
 const Lists = () => {
@@ -50,24 +50,40 @@ const Lists = () => {
       }
     }
 
-    const renameHidden = { display: showRename ? 'none' : '' }
-    const renameShown = { display: showRename ? '' : 'none' }
-    const renameHighlighted = showRename ? 'rename-highlighted' : ''
+    const handleDeleteList = (list) => {
+      const listToBeDeleted = { ...list }
 
-    console.log('renameHighlighted', renameHighlighted)
+      let confirmDelete = `Confirm: delete "${listToBeDeleted.listName}"?`
+
+      if (window.confirm(confirmDelete)) {
+        try {
+          dispatch(deleteList(listToBeDeleted.id))
+          dispatch(createNotification(`List "${listToBeDeleted.listName}" deleted.`))
+        } catch (e) {
+          dispatch(createError(`Error: ${e}`))
+        }
+      }
+    }
+
+    const editHidden = { display: showRename ? 'none' : '' }
+    const editShown = { display: showRename ? '' : 'none' }
+    const editHighlighted = showRename ? 'edit-highlighted' : ''
+
+    console.log('editHighlighted', editHighlighted)
 
     return (
       <div className="listItem">
-        <div className={renameHighlighted}>
+        <div className={editHighlighted}>
           <strong>{list.listName}</strong>
-          <button style={renameHidden} className="button-small" onClick={() => setShowRename(true)}>rename</button>
+          <button style={editHidden} className="button-small" onClick={() => setShowRename(true)}>edit</button>
         
         
-          <div className="list-name-change" style={renameShown}>
+          <div className="list-name-change" style={editShown}>
             <form onSubmit={(e) => handleListNameChange(list, e)}>
               <input name="listNameInput"  />
               <button type="submit">change name</button>
             </form>
+            <button className="button-small" onClick={() => handleDeleteList(list)}>delete list</button>
             <button className="button-small" onClick={() => setShowRename(false)}>cancel</button>
           </div>
         </div>

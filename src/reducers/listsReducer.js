@@ -17,13 +17,18 @@ const listsSlice = createSlice({
       const changedList = action.payload
       return state.map(s => s.id === changedList.id ? changedList : s)
     },
+    removeList(state, action) {
+      const id = action.payload
+      return state.filter(s => s.id !== id)
+    }
   }
 })
 
 export const {
   setLists,
   appendLists,
-  changeList
+  changeList,
+  removeList
 } = listsSlice.actions
 
 export const initializeLists = () => {
@@ -65,6 +70,13 @@ export const updateLists = (listObject, currentUser) => {
       user: currentUser
     }
     dispatch(changeList(updatedListWithUser))
+  }
+}
+
+export const deleteList = (id) => {
+  return async dispatch => {
+    await listsService.deleteList(id)
+    dispatch(removeList(id))
   }
 }
 
