@@ -262,18 +262,39 @@ button:active {
   margin-bottom: 0;
 }
 
-#nav-primary {
+
+
+#header-primary {
   margin: 0 0 1rem 0;
+  display: flex;
 }
 
-#nav-primary a {
+#header-primary img.logo-header {
+  margin-right: 1rem;
+  width: 100px;
+}
+
+#header-primary .nav-container {
+  flex: 1;
+}
+
+#header-primary .header-container {
+  flex: 1;
+}
+
+#header-primary h1 {
+  line-height: 1;
+  margin-top: 2.0rem;
+}
+
+#header-primary .nav-container a {
   font-size: 0.8rem;
   margin: 0 0 0 0.5rem;
   padding: 0 0 0 0.5rem;
   border-left: 1px dotted #444444;
 }
 
-#nav-primary :first-child {
+#header-primary .nav-container :first-child {
   margin-left: 0;
   padding-left: 0;
   border-left: 0;
@@ -417,6 +438,7 @@ table.book-list {
 table.book-list td.book-controls {
   text-align: right;
 }
+
 
 /*
  * =====================

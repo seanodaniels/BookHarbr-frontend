@@ -41,7 +41,6 @@ const App = () => {
       <div id="nav-primary">
         <NavPrimary />
       </div>
-      <h1>BookHarbr</h1>
       <Alert />
       <Routes>
         <Route path="/" element={<Home />} />
