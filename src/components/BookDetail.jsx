@@ -175,16 +175,27 @@ const BookDetail = () => {
   return (
     <div id="book-detail">
       <div id="list-modification">
-        <button className="open-button button-small" onClick={() => handleSelected()}>+list</button>
-        <ListsFunctions selectedBooks={selectedBooks} handleListAdd={handleListAdd} handleListCancel={handleListCancel} />
+        <button className="open-button button-small" 
+          onClick={() => handleSelected()}>+list</button>
+        <ListsFunctions 
+          selectedBooks={selectedBooks} 
+          handleListAdd={handleListAdd} 
+          handleListCancel={handleListCancel} 
+        />
       </div>
       { workInfo.title ? <h2>{workInfo.title}</h2> : null }
       { authorInfo.length > 0
         ? <div className="author">by {authorArr}</div>
         : null
       }
-      { workInfo.covers ? <img className="book-cover" src={buildCoverImageUrl()} /> : null }
-      { workInfo.description ? <div className="description">{buildDescription()}</div> : null }
+      { workInfo.covers 
+        ? <img className="book-cover" src={buildCoverImageUrl()} /> 
+        : null 
+      }
+      { workInfo.description 
+        ? <div className="description">{buildDescription()}</div> 
+        : null 
+      }
 
       {/* { debugInfo() } */}
     </div>

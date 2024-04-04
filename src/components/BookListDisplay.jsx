@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { createList, updateLists, deleteList } from '../reducers/listsReducer'
 import { createNotification, createError } from '../reducers/alertReducer'
+import { Link } from 'react-router-dom'
 
 const BookListDisplay = ({ list }) => {
   const [listName, setListName] = useState(list.listName)
@@ -88,7 +89,7 @@ const BookListDisplay = ({ list }) => {
                 const authors = b.authors.join(', ')
                 return(
                   <tr key={b.bookKey}>
-                    <td className="book-info">{b.title} by {authors}</td>
+                    <td className="book-info"><Link to={`${b.bookKey}`}>{b.title}</Link> by {authors}</td>
                     <td className="book-controls"><button className="button-small" onClick={(e) => handleBookDelete(b,e)}>x</button></td>
                   </tr>
                 )}
