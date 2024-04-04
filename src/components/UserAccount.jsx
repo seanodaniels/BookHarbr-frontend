@@ -54,11 +54,11 @@ const UserAccount = (location) => {
         <form className="login" onSubmit={handleLogin}>
           <div>
             Username
-            <input type="text" name="username" className="login-username" />
+            <input type="text" name="username" defaultValue="demo" className="login-username" />
           </div>
           <div>
             Password
-            <input type="password" name="password" className="login-password" />
+            <input type="password" name="password" defaultValue="demo" className="login-password" />
           </div>
           <button className="login-submit" type="submit">
             login
