@@ -42,13 +42,15 @@ const App = () => {
         <NavPrimary />
       </div>
       <Alert />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/lists" element={<Lists />} />
-        <Route path="/book-search" element={<BookSearch />} />
-        <Route path="/works/:key" element={<BookDetail />} />
-        <Route path="/my-account" element={<UserAccount />} />
-      </Routes>
+      <div id="page-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/lists" element={<Lists />} />
+          <Route path="/book-search" element={<BookSearch />} />
+          <Route path="/works/:key" element={<BookDetail />} />
+          <Route path="/my-account" element={<UserAccount />} />
+        </Routes>
+      </div>
     </div>
   )
 }

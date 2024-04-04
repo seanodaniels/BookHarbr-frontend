@@ -6,7 +6,9 @@ const NavPrimary = () => {
 
   return (
     <div id="header-primary">
-      <a href="/"><img src="/images/bookharbr-logo-2000.png" className="logo-header" /></a>
+      <div className="header-image">
+        <a href="/"><img src="/images/bookharbr-logo-2000.png" className="logo-header" /></a>
+      </div>
       <div className="header-container">
         <a href="/"><h1>BookHarbr</h1></a>
         <div className="nav-container">          
@@ -15,7 +17,7 @@ const NavPrimary = () => {
           <Link to="/book-search">Book Search</Link>
           { user === null 
             ? <Link to="/my-account">Login</Link>
-            : <Link to="/my-account">{user.username}&lsquo;s Account</Link>
+            : <Link to="/my-account">{user.username}&apos;s Account</Link>
           } 
         </div>
       </div>   

@@ -89,7 +89,7 @@ const BookListDisplay = ({ list }) => {
                 const authors = b.authors.join(', ')
                 return(
                   <tr key={b.bookKey}>
-                    <td className="book-info"><Link to={`${b.bookKey}`}>{b.title}</Link> by {authors}</td>
+                    <td className="book-info"><span className="book-title"><Link to={`${b.bookKey}`}>{b.title}</Link></span> by <span className="book-authors">{authors}</span></td>
                     <td className="book-controls"><button className="button-small" onClick={(e) => handleBookDelete(b,e)}>x</button></td>
                   </tr>
                 )}

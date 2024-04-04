@@ -212,12 +212,13 @@ const BookSearch = () => {
       </div>
 
       <div id="search-main">
-        <p>Books selected: {selectedBooks.map(b => b.bookKey + ' ')}</p>
-        <p>Search for your book.</p>
+        <h2>Book Search</h2>
+        <p>Enter your search term below.</p>
         <form className="book-search" onSubmit={handleSubmit}>
           <input 
             type="text" 
             name="searchTerms" 
+            className="input-book-search" 
             onChange={(event) => setSearchTerms(event.target.value)}  
           />
           <button type="submit">Search</button>
