@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import NavPrimaryMobile from './NavPrimaryMobile'
 
 const NavPrimary = () => {
   const user = useSelector(state => state.user)
@@ -7,11 +8,11 @@ const NavPrimary = () => {
   return (
     <div id="header-primary">
       <div className="header-image">
-        <a href="/"><img src="/images/bookharbr-logo-2000.png" className="logo-header" /></a>
+        <a href="/"><img src="/images/bookharbr-logo.png" className="logo-header" /></a>
       </div>
       <div className="header-container">
         <a href="/"><h1>BookHarbr</h1></a>
-        <div className="nav-container">          
+        <div id="nav-desktop" className="nav-container">          
           <Link to="/">Home</Link>
           <Link to="/lists">My Lists</Link>
           <Link to="/book-search">Book Search</Link>
@@ -20,7 +21,10 @@ const NavPrimary = () => {
             : <Link to="/my-account">{user.username}&apos;s Account</Link>
           } 
         </div>
-      </div>   
+      </div> 
+      <div id="nav-hamburger">
+        <NavPrimaryMobile />
+      </div>  
     </div>
   )
 }

@@ -30,17 +30,19 @@ const Lists = () => {
   return (
     <div id="lists">
         <h2>Lists</h2>
-        <Toggle buttonLabel="add new" size="small">
+        <Toggle buttonLabel="New List" size="small">
         <form onSubmit={handleSubmit}>
           <input name="listName" />
           <button type="submit">add new list</button>
-        </form>
+        </form> 
         </Toggle>
-      {myLists.map(l => {
-        return (
-          <BookListDisplay key={l.id} list={l} />
-        )
-      })}
+        <div className="page-contents">
+          {myLists.map(l => {
+            return (
+              <BookListDisplay key={l.id} list={l} />
+            )
+          })}
+        </div>
     </div>
   )
 }

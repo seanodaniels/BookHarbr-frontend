@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom'
+
 const NeedLogin = () => {
   return (
     <div id="need-login">
       <h2>Login Required</h2>
-      <p>Please login at the top of the page in order to see the content.</p>
+      <p>Welcome. Please <Link to="/my-account">log in to continue</Link>.</p>
     </div>
   )
 }
