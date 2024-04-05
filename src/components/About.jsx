@@ -24,7 +24,7 @@ const About = () => {
       </ul>
 
       <p>The book search is powered by the OpenLibrary.org API. Information from that API is used to build the 
-        BookHarbr book lists which are stored at Mongo Atlas, which also houses user information.</p>
+        BookHarbr book lists. The lists and user information are stored at Mongo Atlas.</p>
 
       <p>You can view the GitHub repos for BookHarbr here:<br />
       <ul>
