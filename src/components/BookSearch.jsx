@@ -159,6 +159,7 @@ const BookSearch = () => {
   }
 
   const handleListCancel = (event) => {
+    event.preventDefault()
     addToListHide()
     setSelectedBooks([])
   }

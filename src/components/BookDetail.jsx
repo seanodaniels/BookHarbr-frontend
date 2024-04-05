@@ -164,38 +164,45 @@ const BookDetail = () => {
     addToListHide()
   }
   
-  const handleListCancel = null
+  const handleListCancel = (event) => {
+    event.preventDefault()
+    addToListHide()
+    setSelectedBooks([])
+  }
 
   // Prevent re-rendering if the user refreshes the browser
   if (!workInfo) {
-    return null
+    return <div><p>No work selected.</p></div>
   }
 
-
   return (
-    <div id="book-detail">
-      <div id="list-modification">
-        <button className="open-button button-small" 
-          onClick={() => handleSelected()}>+list</button>
-        <ListsFunctions 
-          selectedBooks={selectedBooks} 
-          handleListAdd={handleListAdd} 
-          handleListCancel={handleListCancel} 
-        />
-      </div>
-      { workInfo.title ? <h2>{workInfo.title}</h2> : null }
-      { authorInfo.length > 0
-        ? <div className="author">by {authorArr}</div>
-        : null
-      }
+    <div className="page-contents" id="book-detail">
       { workInfo.covers 
-        ? <img className="book-cover" src={buildCoverImageUrl()} /> 
+        ? <div className="work-cover">
+            <img className="cover" src={buildCoverImageUrl()} />
+          </div> 
         : null 
       }
-      { workInfo.description 
-        ? <div className="description">{buildDescription()}</div> 
-        : null 
+      <div className="work-info">
+        { workInfo.title ? <h2 className="work-title">{workInfo.title}</h2> : null }
+        { authorInfo.length > 0
+          ? <div className="work-author">by {authorArr}</div>
+          : null
+        }
+        <div id="list-modification">
+          <button className="open-button button-small" 
+            onClick={() => handleSelected()}>+list</button>
+          <ListsFunctions 
+            selectedBooks={selectedBooks} 
+            handleListAdd={handleListAdd} 
+            handleListCancel={handleListCancel} 
+          />
+        </div>
+        { workInfo.description 
+          ? <div className="work-description"><h3>Description</h3>{buildDescription()}</div> 
+          : null 
       }
+      </div>
 
       {/* { debugInfo() } */}
     </div>

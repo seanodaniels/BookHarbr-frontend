@@ -19,8 +19,9 @@ const ListsFunctions = ({ selectedBooks, handleListAdd, handleListCancel }) => {
             })       
           }
           <button type="submit">add to list</button>
+          <button onClick={handleListCancel}>cancel</button>
         </form>
-        <button onClick={handleListCancel}>cancel</button>
+        
       </div>
     </div>
   )

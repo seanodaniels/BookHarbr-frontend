@@ -199,7 +199,6 @@ p {
  * ======== Styles =============
  */
 
-
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -366,13 +365,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-menu-wrap {
   position: fixed;
   height: 100%;
+  top: 0;
 }
 
 /* General sidebar styles */
 .bm-menu {
   background: #373a47;
-  padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
+  padding: 0 1.5em 0;
+  font-size: 2em;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -389,6 +389,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Individual item */
 .bm-item {
   display: inline-block;
+  padding: 0.5em 0;
 }
 
 /* Styling of overlay */
@@ -479,10 +480,31 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 #book-detail {
-  padding: 0;
+  align-items: top;
+  display: flex;
+  flex-basis: 400px;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 0 0 1rem 0;
 }
 
-#book-detail .description {
+#book-detail .work-cover {
+  flex-basis: 150px;
+  flex-shrink: 5;
+  padding: 0 1rem 0 0;
+}
+
+#book-detail img.cover {
+  width: 100%;
+}
+
+#book-detail .work-info {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 300px;
+}
+
+#book-detail .work-description {
   white-space: pre-wrap;
 }
 
@@ -504,8 +526,6 @@ table.data-display-01 td {
 table.data-display-01 .button-small {
   margin-bottom: 0.5rem;
 }
-
-
 
 /* Popup */
 .popup {

@@ -26,6 +26,7 @@ const NavPrimaryMobile = () => {
       isOpen={menuVisible}
       onOpen={toggleMenu}  
       onClose={toggleMenu} 
+      width={ '100%' }
     >
         <Link onClick={() => closeMenu()} className="menu-item" to="/">Home</Link>
         <Link onClick={() => closeMenu()} className="menu-item" to="/lists">My Lists</Link>
