@@ -7,8 +7,7 @@ const About = () => {
     <div id="home">
       <h2>About BookHarbr</h2>
 
-      <p>BookHarbr is simple app to create lists of books. For a live demo, please visit <a href="https://bookharbr.com/"
-      target="_blank">https://bookharbr.com/ </a> and login as demo/demo.</p>
+      <p>BookHarbr is simple app to create lists of books. For a live demo, please <a href="/my-account">visit the login page</a> and sign in as demo/demo.</p>
       <h3>Tech Breakdown</h3>
       <p>BookHarbr is a litle project I created to showcase the Javascript and React that I have learned. The 
         core of the app is built in NodeJS and React, and a breakdown of the other technologies is as follows:</p>
