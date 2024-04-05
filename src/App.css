@@ -287,6 +287,16 @@ button:active {
   width: 100%;
 }
 
+#page-content a {
+  color: var(--bh-blue);
+  text-decoration: underline;
+}
+
+#page-content a:hover {
+  color: var(--bh-sea);
+  text-decoration: none;
+}
+
 #footer {
   border-top: 1px solid #cccccc;
   color: #aaaaaa;
@@ -364,8 +374,8 @@ button:active {
   position: fixed;
   width: 36px;
   height: 30px;
-  right: 36px;
-  top: 36px;
+  right: 1rem;
+  top: 1rem;
 }
 
 /* Color/shape of burger icon bars */

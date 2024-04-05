@@ -11,6 +11,7 @@ const Home = () => {
         <p>BookHarbr is a simple app that allows you to create and populate lists of your favorite books.
           You can make lists to track books you have read, books you want to read, books that fit a certain genre or mood,
           or whatever you want.</p>
+        <p>You can also read about how the app was built <Link to="/about">on the About page</Link>.</p>
       </div>
     )
   }

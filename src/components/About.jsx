@@ -5,8 +5,34 @@ const About = () => {
   const user = useSelector(state => state.user)
   return (
     <div id="home">
-      <h2>About</h2>
-      <p>hi.</p>
+      <h2>About BookHarbr</h2>
+
+      <p>BookHarbr is simple app to create lists of books. For a live demo, please visit <a href="https://bookharbr.com/"
+      target="_blank">https://bookharbr.com/ </a> and login as demo/demo.</p>
+      <h3>Tech Breakdown</h3>
+      <p>BookHarbr is a litle project I created to showcase the Javascript and React that I have learned. The 
+        core of the app is built in NodeJS and React, and a breakdown of the other technologies is as follows:</p>
+      <ul>
+        <li><strong>Redux, React-Redux, Redux Toolkit</strong> For handling global state.</li>
+        <li><strong>MongoDB and Mongoose</strong></li>
+        <li><strong>Express</strong> For the BookHarbr API.</li>
+        <li><strong>Axios</strong></li>
+        <li><strong>React Router</strong></li>
+        <li><strong>bcrypt, jsonwebtoken</strong> for token authentication.</li>
+        <li><strong>Jest</strong></li>
+        <li><strong>Flexbox</strong></li>
+      </ul>
+
+      <p>The book search is powered by the OpenLibrary.org API. Information from that API is used to build the 
+        BookHarbr book lists which are stored at Mongo Atlas, which also houses user information.</p>
+
+      <p>You can view the GitHub repos for BookHarbr here:<br />
+      <ul>
+      <li><a href="https://github.com/seanodaniels/BookHarbr-backend" target="_blank">BookHarbr Backend API</a></li>
+      <li><a href="https://github.com/seanodaniels/BookHarbr-frontend" target="_blank">BookHarbr Front End</a></li>
+      </ul>
+      </p>
+
     </div>
   )
 }

@@ -4,6 +4,8 @@ import listsService from '../services/lists'
 import { userSet } from '../reducers/userReducer'
 import { setUserLists } from '../reducers/listsReducer'
 import { createNotification, createError } from '../reducers/alertReducer'
+import { Link } from 'react-router-dom'
+
 
 const UserAccount = (location) => {
   const dispatch = useDispatch()
@@ -37,8 +39,8 @@ const UserAccount = (location) => {
   if (currentUser) {
     return (
       <div id="user-account">
-        <h2>User Account</h2>
-        <p>User info here.</p>
+        <h2>User Account for <strong>{currentUser.username}</strong></h2>
+        <p>Check out <Link to="/lists">your lists</Link>.</p>
         <form onSubmit={handleLogout}>
             <button className="login-logout" type="submit">
               logout
