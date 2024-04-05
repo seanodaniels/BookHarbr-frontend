@@ -25,12 +25,11 @@ const About = () => {
       <p>The book search is powered by the OpenLibrary.org API. Information from that API is used to build the 
         BookHarbr book lists. The lists and user information are stored at Mongo Atlas.</p>
 
-      <p>You can view the GitHub repos for BookHarbr here:<br />
+      <p>You can view the GitHub repos for BookHarbr here:</p>
       <ul>
       <li><a href="https://github.com/seanodaniels/BookHarbr-backend" target="_blank">BookHarbr Backend API</a></li>
       <li><a href="https://github.com/seanodaniels/BookHarbr-frontend" target="_blank">BookHarbr Front End</a></li>
       </ul>
-      </p>
 
     </div>
   )
