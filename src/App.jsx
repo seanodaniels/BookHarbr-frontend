@@ -18,6 +18,8 @@ import BookDetail from './components/BookDetail'
 import UserAccount from  './components/UserAccount'
 import NavPrimary from './components/NavPrimary'
 import Alert from './components/Alert'
+import About from './components/About'
+import Footer from './components/Footer'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -40,16 +42,20 @@ const App = () => {
     <div id="page">
       <div id="nav-primary">
         <NavPrimary />
-      </div>
-      <Alert />
+      </div>      
       <div id="page-content">
+        <Alert />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/lists" element={<Lists />} />
+          <Route path="/about" element={<About />} />
           <Route path="/book-search" element={<BookSearch />} />
           <Route path="/works/:key" element={<BookDetail />} />
           <Route path="/my-account" element={<UserAccount />} />
         </Routes>
+      </div>
+      <div id="footer-content">
+        <Footer />
       </div>
     </div>
   )

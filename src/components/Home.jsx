@@ -3,18 +3,30 @@ import { Link } from 'react-router-dom'
 
 const Home = () => {
   const user = useSelector(state => state.user)
+
+  const HomeContent = () => {
+    return (
+      <div className="home-content">
+        <h2>Welcome to BookHarbr</h2>
+        <p>BookHarbr is a simple app that allows you to create and populate lists of your favorite books.
+          You can make lists to track books you have read, books you want to read, books that fit a certain genre or mood,
+          or whatever you want.</p>
+      </div>
+    )
+  }
+
   if (user) {
   return (
     <div id="home">
-      <h2>Home</h2>
-      <p>Welcome, {user.username}. Check out <Link to="/lists">your lists</Link>.</p>
+      <p>Welcome, {user.username}.</p>
+      <HomeContent />      
     </div>
   )
   } else {
     return (
       <div id="home">
-        <h2>Home</h2>
         <p>Welcome. Please <Link to="/my-account">log in to continue</Link>.</p>
+        <HomeContent /> 
       </div>
     )
   }

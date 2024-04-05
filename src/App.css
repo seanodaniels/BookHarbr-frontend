@@ -202,7 +202,7 @@ p {
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 0 2rem 0;
+  padding: 0;
 }
 
 body {
@@ -256,23 +256,24 @@ button:active {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  margin: 1rem;
+  min-height: 100vh;
 }
 
 #page h1 {
-  font-size: 2.3rem;
+  font-size: 3rem;
   margin: 0;
   text-align: left;
   color: var(--bh-blue);
 }
 
 #page h2 {
-  font-size: 2rem;
+  font-size: 1.75rem;
   margin-top: 0;
   margin-bottom: 0;
 }
 
 #page #nav-primary {
+  padding: 1rem;
   width: 100%;
 }
 
@@ -281,8 +282,38 @@ button:active {
 }
 
 #page #page-content {
+  flex: 1 0 auto;
+  padding: 0 1rem 2rem 1rem;
   width: 100%;
 }
+
+#footer {
+  border-top: 1px solid #cccccc;
+  color: #aaaaaa;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  padding: 1em 0;
+  text-align: center;
+}
+
+#footer a {
+  color: #999999;
+  text-decoration: underline;
+}
+
+#footer a:hover {
+  text-decoration: none;
+}
+
+#footer .nav-container a {
+  color: #999999;
+  padding: 0.25rem 0.5rem;
+}
+
+#footer-content {
+  background: #e2e2e2;
+}
+
 
 #header-primary {
   align-items: center;
@@ -290,7 +321,7 @@ button:active {
   flex-basis: 400px;
   flex-direction: row;
   justify-content: flex-start;
-  margin: 0 0 1rem 0;
+  margin: 0;
 }
 
 #header-primary .header-image {
@@ -600,6 +631,7 @@ table.book-list {
 table.book-list td.book-controls {
   text-align: right;
 }
+
 
 
 /*
