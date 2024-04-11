@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import './App.css'
 import {
   BrowserRouter as Router,
+  HashRouter,
   Routes,
   Route,
   Link,
