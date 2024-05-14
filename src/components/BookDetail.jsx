@@ -172,7 +172,7 @@ const BookDetail = () => {
 
   // Prevent re-rendering if the user refreshes the browser
   if (!workInfo) {
-    return <div><p>No work selected.</p></div>
+    return <div><p>Loading...</p></div>
   }
 
   return (
@@ -201,8 +201,8 @@ const BookDetail = () => {
         { workInfo.description 
           ? <div className="work-description"><h3>Description</h3>{buildDescription()}</div> 
           : null 
-      }
-      </div>
+        }
+        </div>
 
       {/* { debugInfo() } */}
     </div>

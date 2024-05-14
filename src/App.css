@@ -324,7 +324,6 @@ button:active {
   background: #e2e2e2;
 }
 
-
 #header-primary {
   align-items: center;
   display: flex;
@@ -547,6 +546,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 #book-detail .work-description {
   white-space: pre-wrap;
+  word-break: break-all;
 }
 
 table.data-display-01 {
